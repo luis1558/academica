@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Lista de cursos{% endblock %}
+{% block content %}
+    <h2>Listado de cursos</h2>
+    <table class="table table-striped datatable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha de fin</th>
+                <th>Cupos</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for curso in cursos %}
+                <tr>
+                    <td>{{ curso.nombre }}</td>
+                    <td>{{ curso.descripcion }}</td>
+                    <td>{{ curso.fecha_inicio }}</td>
+                    <td>{{ curso.fecha_fin }}</td>
+                    <td>{{ curso.cupos }}</td>
+                    <td>{% if curso.estado %}Activo{% else %}Inactivo{% endif %}</td>
+                    <td><a href="{% url 'detalle_curso' curso.pk %}" class="btn btn-primary btn-sm">Ver detalles</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7"></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
